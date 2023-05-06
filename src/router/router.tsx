@@ -9,12 +9,14 @@ import { HomePage } from "../pages/HomePage.jsx";
 import { CheckoutPage } from "../pages/CheckoutPage.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
 import { ProductPage } from "../pages/ProductPage.jsx";
+import { LoginPage } from "../pages/LoginPage.jsx";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Navigate to="/newfeed" />} />
       <Route path="home" element={<HomePage />} />
+      <Route path="login" element={<LoginPage />} />
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="landing" element={<LandingPage />} />
       <Route path="product" element={<ProductPage />} />
