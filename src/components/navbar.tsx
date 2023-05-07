@@ -43,7 +43,7 @@ const Navbar = () => {
               </a>
               <ul className="dropdown-menu" aria-labelledby="pagesExample">
                 <li>
-                  <a className="dropdown-item" href="/login/">
+                  <a className="dropdown-item" href="/auth-page">
                     Login
                   </a>
                 </li>
