@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import Navbar from "../../components/navbar";
 import { Outlet } from "react-router-dom";
 export const AuthPage = () => {
   return (
     <React.Fragment>
       <main>
-        <Navbar />
         <div className="authPage">
           <div
-            class="container"
+            className="container"
             style={{ maxWidth: "500px", marginTop: "100px" }}
           >
             <ul
-              class="nav nav-pills nav-justified mb-3"
+              className="nav nav-pills nav-justified mb-3"
               id="ex1"
               role="tablist"
             >
-              <li class="nav-item" role="presentation">
+              <li className="nav-item" role="presentation">
                 <a
-                  class="nav-link link-primary"
+                  className="nav-link link-primary"
                   id="tab-login"
                   data-mdb-toggle="pill"
                   href="/auth-page/login"
@@ -29,9 +27,9 @@ export const AuthPage = () => {
                   Login
                 </a>
               </li>
-              <li class="nav-item" role="presentation">
+              <li className="nav-item" role="presentation">
                 <a
-                  class="nav-link link-primary"
+                  className="nav-link link-primary"
                   id="tab-register"
                   data-mdb-toggle="pill"
                   href="/auth-page/sign-up"
@@ -43,7 +41,7 @@ export const AuthPage = () => {
                 </a>
               </li>
             </ul>
-            <div class="tab-content">
+            <div className="tab-content">
               <Outlet />
             </div>
           </div>

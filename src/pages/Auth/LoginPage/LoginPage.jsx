@@ -1,67 +1,111 @@
 import React from "react";
-import "./login.css";
+import "./LoginPage.scss";
+import { useFormik } from "formik";
+import { useNavigate } from 'react-router-dom'
+import api from "../../../api/api";
+import * as Yup from "yup";
+
 export const LoginPage = () => {
-  // formik and yup
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().min(6, "Ít nhất 6 kí tự").required("Không được để trống"),
+      password: Yup.string().min(6, "Ít nhất 6 kí tự").required("Không được để trống"),
+    }),
+    onSubmit: async (values) => {
+      let payload = {
+        username: values.username,
+        password: values.password,
+      }
+      let res = await api('login', payload)
+      if (res.success) {
+        navigate('/home')
+      }
+    },
+  });
+
   return (
-    <div
-      class="tab-pane fade show active"
-      id="pills-login"
-      role="tabpanel"
-      aria-labelledby="tab-login"
-    >
-      <form>
-        <div class="text-center mb-3">
+    <form onSubmit={formik.handleSubmit}>
+      <div
+        className="tab-pane fade show active"
+        id="pills-login"
+        role="tabpanel"
+        aria-labelledby="tab-login"
+      >
+        <div className="text-center mb-3">
           <p>Sign in with:</p>
-          <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-facebook-f"></i>
+          <button type="button" className="btn btn-link btn-floating mx-1">
+            <i className="fab fa-facebook-f"></i>
           </button>
 
-          <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-google"></i>
+          <button type="button" className="btn btn-link btn-floating mx-1">
+            <i className="fab fa-google"></i>
           </button>
         </div>
 
-        <p class="text-center">or:</p>
+        <p className="text-center">or:</p>
 
-        <div class="form-outline mb-4">
-          <input type="email" id="loginName" class="form-control" />
-          <label class="form-label" for="loginName">
+        <div className="form-outline mb-4">
+          <label className="form-label" htmlFor="username">
             Username
           </label>
+          <input
+            type="text"
+            id="username"
+            className={`form-control ${formik.touched.username && formik.errors.username ? 'input-error' : ''}`}
+            {...formik.getFieldProps("username")}
+          />
+          {formik.touched.username && formik.errors.username ? (
+            <div className="invalid-text">{formik.errors.username}</div>
+          ) : null}
         </div>
-        <div class="form-outline mb-4">
-          <input type="password" id="loginPassword" class="form-control" />
-          <label class="form-label" for="loginPassword">
+        <div className="form-outline mb-4">
+          <label className="form-label" htmlFor="password">
             Password
           </label>
+          <input
+            type="password"
+            id="password"
+            className={`form-control ${formik.touched.password && formik.errors.password ? 'input-error' : ''}`}
+            {...formik.getFieldProps("password")}
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <div className="invalid-text">{formik.errors.password}</div>
+          ) : null}
         </div>
-        <div class="row mb-4">
-          <div class="col-md-6 d-flex justify-content-center">
-            <div class="form-check mb-3 mb-md-0">
+        <div className="row mb-4">
+          {/* <div className="col-md-6 d-flex justify-content-center">
+            <div className="form-check mb-3 mb-md-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value=""
                 id="loginCheck"
                 checked
               />
-              <label class="form-check-label" for="loginCheck">
-                {" "}
-                Remember me{" "}
+              <label className="form-check-label" htmlFor="loginCheck">
+                Remember me
               </label>
             </div>
-          </div>
+          </div> */}
 
-          <div class="col-md-6 d-flex justify-content-center">
+          <div className="col-md-6 d-flex justify-content-center">
             <a href="#!">Forgot password?</a>
           </div>
         </div>
         <div className="col text-center">
-          <button type="submit" class="btn btn-primary btn-block mb-4 center ">
+          <button
+            type="submit"
+            className="btn btn-primary btn-block mb-4 center "
+          >
             Sign in
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
