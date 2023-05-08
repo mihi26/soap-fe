@@ -1,5 +1,5 @@
 const requireAccess = {
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTcyOTU2OWM1Nzk3M2IxNTJjMmI2ZSIsImlhdCI6MTY4MzQzMzk4NiwiZXhwIjoxNjg2MDI1OTg2fQ.5A2BZgOlbpwU_a2PZybnSYOSJsT2Q-Dc5iugoFWSIAs`,
+  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTg4MTZhMDJlZWU2YmFlZTA4ZGRkZSIsImlhdCI6MTY4MzUzNzM3MCwiZXhwIjoxNjg2MTI5MzcwfQ.0hbUY0kGtpFl6Ko-iVHMHt3WXaucpTpKHsfCueod_I0`,
 };
 const api = (config) => ({
   login: (payload) => {
@@ -20,6 +20,14 @@ const api = (config) => ({
   },
   getProductDetail: (payload) => {
     return config("get", `api/v1/products/${payload}`, null, requireAccess);
+  },
+  getUserProfile: () => {
+    return config("get", "api/v1/users/me", null, requireAccess);
+  },
+  updateUserAvatar: (payload) => {
+    return config("post", "api/v1/users/avatar", {
+      
+    }, requireAccess);
   },
 });
 

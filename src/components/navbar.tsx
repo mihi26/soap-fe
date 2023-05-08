@@ -39,6 +39,11 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
+                  <a className="dropdown-item" href="/user/me">
+                    Profile
+                  </a>
+                </li>
+                <li>
                   <a className="dropdown-item" href="/landing">
                     Landing Page
                   </a>
