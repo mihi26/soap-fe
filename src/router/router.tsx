@@ -13,6 +13,7 @@ import { ProductDetailPage } from "../pages/ProductDetailPage.jsx";
 import { AuthPage } from "../pages/Auth/AuthPage.jsx";
 import { LoginPage } from "../pages/Auth/LoginPage/LoginPage.jsx";
 import { SignUpPage } from "../pages/Auth/SignUpPage/SignUpPage.jsx";
+import { UserPage } from "../pages/User/UserPage.jsx";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ export const router = createBrowserRouter(
         <Route path="sign-up" element={<SignUpPage />} />
       </Route>
       <Route path="checkout" element={<CheckoutPage />} />
+      <Route path="user/me" element={<UserPage />} />
       <Route path="landing" element={<LandingPage />} />
       <Route path="product" element={<ProductPage />} />
       <Route path="product/:productId" element={<ProductDetailPage />} />
