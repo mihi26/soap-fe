@@ -1,19 +1,45 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import data from "../mock/data.json";
+import api from "../api/api";
 import "../assets/scss/soap-ecommerce.scss";
-import Navbar from "../components/navbar";
-import CardProduct from "../components/products/cardProduct";
+import CardProduct from "../components/products/cardProduct/cardProduct";
 import ProductOverviewGrid from "../components/products/productOverviewGrid";
-import StoreDoubleColumn from "../components/store/storeDoubleColumn";
 import ReviewSummaryChart from "../components/reviews/reviewSummaryChart";
 
 export function ProductPage() {
   let productReviews = data.reviews.filter((x) => x.productID == "01");
+  const [productList, setProductList] = useState([]);
+  const getProductsFromApi = async () => {
+    let res = await api("getProducts");
+    if (res.success) {
+      setProductList(res.data.data);
+    }
+  };
+
+  useEffect(() => {
+    getProductsFromApi();
+  }, []);
+
   return (
     <main>
-      <Navbar />
-      <div class="container mt-5">
-        <ProductOverviewGrid
+      {/* {productList} */}
+      <div className="container mt-5">
+        <div className="row">
+          {productList.map((product) => (
+            <div className="col-md-6 col-lg-3" key={product._id}>
+              <CardProduct
+                id={product._id}
+                thumb_src={product.imageUrls}
+                title={product.name}
+                description={product.description}
+                price={product.price}
+                position="left"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* <ProductOverviewGrid
           colors={data.products[0].colors}
           images={data.products[0].images}
           title={data.products[0].title}
@@ -24,13 +50,13 @@ export function ProductPage() {
           rating={data.products[0].rating}
           reviews={data.products[0].reviews}
           sizes={data.products[0].sizes}
-        />
+        /> */}
 
-        <div class="my-5">
+        {/* <div class="my-5">
           <ReviewSummaryChart reviews={productReviews} />
-        </div>
+        </div> */}
 
-        <div class="row">
+        {/* <div class="row">
           <h5 class="mb-4">Customers also purchased</h5>
           {data.products.map((product) => (
             <div class="col-md-6 col-lg-3">
@@ -44,9 +70,8 @@ export function ProductPage() {
               />
             </div>
           ))}
-        </div>
-        <hr class="dark horizontal my-5" />
-        <StoreDoubleColumn />
+        </div> */}
+        {/* <hr class="dark horizontal my-5" /> */}
       </div>
     </main>
   );

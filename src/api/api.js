@@ -1,11 +1,11 @@
 import axios from "axios";
 import apiMapEndpoint from "./apiMap";
 
-const BASE_URL = "host:here" || "";
+const BASE_URL = "http://35.198.235.109" || "";
 
 const request = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 const config = (method, url, data, header) => {
@@ -25,15 +25,11 @@ const config = (method, url, data, header) => {
   }
   return obj;
 };
-const getTenantPath = () => {
-  return window.companyPath;
-};
 
 const apiMap = { ...apiMapEndpoint(config) };
 const api = async (apiName, apiParams) => {
   const config = apiMap[apiName](apiParams);
-  const tenantPath = getTenantPath();
-  config.url = `${tenantPath}${config.url}`;
+  config.url = `${config.url}`;
   try {
     const { data } = await request(config);
     return {

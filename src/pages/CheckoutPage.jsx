@@ -1,8 +1,7 @@
 import React from "react";
 import data from "../mock/data.json";
 import "../assets/scss/soap-ecommerce.scss";
-import Navbar from "../components/navbar";
-import CardProduct from "../components/products/cardProduct";
+import CardProduct from "../components/products/cardProduct/cardProduct";
 import ShoppingCart from "../components/cart/shoppingCart";
 import StoreDoubleColumn from "../components/store/storeDoubleColumn";
 export function CheckoutPage() {
@@ -13,7 +12,6 @@ export function CheckoutPage() {
   return (
     <React.Fragment>
       <main>
-        <Navbar />
         <ShoppingCart products={cartItems} />
         <div class="container mt-5">
           <div class="row">

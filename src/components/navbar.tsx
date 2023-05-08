@@ -3,7 +3,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-sticky py-3 start-0 end-0">
       <div className="container px-1">
         <a className="navbar-brand font-weight-bolder ms-lg-0 " href="/home">
-          TakaTiki Ecommerce
+          TikiTaka Ecommerce
         </a>
         <button
           className="navbar-toggler shadow-none ms-2"
@@ -22,15 +22,6 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navigation">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <a
-                className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 "
-                aria-current="page"
-                href="/"
-              >
-                All Components
-              </a>
-            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link text-dark dropdown-toggle font-weight-bold d-flex align-items-center me-2 "

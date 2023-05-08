@@ -9,6 +9,7 @@ import { HomePage } from "../pages/HomePage.jsx";
 import { CheckoutPage } from "../pages/CheckoutPage.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
 import { ProductPage } from "../pages/ProductPage.jsx";
+import { ProductDetailPage } from "../pages/ProductDetailPage.jsx"
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ export const router = createBrowserRouter(
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="landing" element={<LandingPage />} />
       <Route path="product" element={<ProductPage />} />
+      <Route path="product/:productId" element={<ProductDetailPage />} />
       <Route path="*" element={<Navigate to="/home" replace={true} />} />
     </Route>
   ),
