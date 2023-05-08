@@ -18,7 +18,7 @@ import { UserPage } from "../pages/User/UserPage.jsx";
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<Navigate to="/newfeed" />} />
+      <Route index element={<Navigate to="/auth-page" />} />
       <Route path="home" element={<HomePage />} />
       <Route path="auth-page" element={<AuthPage />}>
         <Route index element={<Navigate to="/auth-page/login" />} />
