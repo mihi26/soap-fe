@@ -1,7 +1,5 @@
 interface Props {
-  rating: number;
-  reviews: number;
-}
+  rating: number;}
 
 export default function ProductRating({ rating, reviews }: Props) {
   const ratingStar = [];
@@ -45,9 +43,6 @@ export default function ProductRating({ rating, reviews }: Props) {
     <>
       <div className="d-flex align-items-center">
         {ratingStar}
-        <a href="#" className="ms-3 text-sm font-weight-medium text-primary">
-          {reviews} reviews
-        </a>
       </div>
     </>
   );

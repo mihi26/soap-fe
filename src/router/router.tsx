@@ -9,6 +9,7 @@ import { HomePage } from "../pages/HomePage.jsx";
 import { CheckoutPage } from "../pages/CheckoutPage.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
 import { ProductPage } from "../pages/ProductPage.jsx";
+import { ProductDetailPage } from "../pages/ProductDetailPage.jsx"
 import { AuthPage } from "../pages/Auth/AuthPage.jsx";
 import { LoginPage } from "../pages/Auth/LoginPage/LoginPage.jsx";
 import { SignUpPage } from "../pages/Auth/SignUpPage/SignUpPage.jsx";
@@ -26,6 +27,7 @@ export const router = createBrowserRouter(
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="landing" element={<LandingPage />} />
       <Route path="product" element={<ProductPage />} />
+      <Route path="product/:productId" element={<ProductDetailPage />} />
       <Route path="*" element={<Navigate to="/home" replace={true} />} />
     </Route>
   ),
