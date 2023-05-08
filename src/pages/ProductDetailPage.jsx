@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import ProductOverviewGallery from "../components/products/productOverviewGallery";
+import ProductOverviewGallery from "../components/products/productOverviewGallery/ProductOverviewGallery";
 import { useParams } from "react-router-dom";
 import api from "../api/api";
 
@@ -24,6 +24,7 @@ export function ProductDetailPage() {
         image={productDetail.imageUrls}
         title={productDetail.name}
         description={productDetail.description}
+        quantity={productDetail.quantity}
         price={productDetail.price}
         rating={productDetail.rating}
       />

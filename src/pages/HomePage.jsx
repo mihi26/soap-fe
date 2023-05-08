@@ -6,7 +6,7 @@ import StoreNavbar from "../components/store/storeNavbar";
 import CardProduct from "../components/products/cardProduct/cardProduct";
 import CardCategory from "../components/products/cardCategory";
 import ProductOverviewGrid from "../components/products/productOverviewGrid";
-import ProductOverviewGallery from "../components/products/productOverviewGallery";
+import ProductOverviewGallery from "../components/products/productOverviewGallery/productOverviewGallery";
 import ShoppingCart from "../components/cart/shoppingCart";
 import ShoppingCart2 from "../components/cart/shoppingCart2";
 import ProductQuickview from "../components/products/productQuickview";
