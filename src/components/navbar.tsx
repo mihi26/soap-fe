@@ -34,6 +34,11 @@ const Navbar = () => {
               </a>
               <ul className="dropdown-menu" aria-labelledby="pagesExample">
                 <li>
+                  <a className="dropdown-item" href="/auth-page">
+                    Login
+                  </a>
+                </li>
+                <li>
                   <a className="dropdown-item" href="/landing">
                     Landing Page
                   </a>
