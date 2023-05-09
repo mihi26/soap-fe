@@ -85,31 +85,31 @@ export const ProductsPage = () => {
             <table class="table-over table-borderless mb-0">
               <thead>
                 <tr>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     #
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Image
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Name
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Description
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Price
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Quantity
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Category
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Rating
                   </th>
-                  <th className="product-itemm" scope="col">
+                  <th className="product-item" scope="col">
                     Action
                   </th>
                 </tr>
@@ -118,23 +118,23 @@ export const ProductsPage = () => {
                 {products.map((product, index) => {
                   return (
                     <tr>
-                      <th className="product-itemm" scope="row">
+                      <th className="product-item" scope="row">
                         {index + 1}
                       </th>
-                      <td className="product-itemm">
+                      <td className="product-item">
                         <img width={100} src={product.imageUrls} />
                       </td>
-                      <td className="product-itemm">{product.name}</td>
-                      <td className="product-itemm">
+                      <td className="product-item">{product.name}</td>
+                      <td className="product-item">
                         {product.description.length > 50
                           ? product.description.slice(0, 130) + "..."
                           : product.description}
                       </td>
-                      <td className="product-itemm">{product.price}</td>
-                      <td className="product-itemm">{product.quantity}</td>
-                      <td className="product-itemm">Electric device</td>
-                      <td className="product-itemm">{product.rating}</td>
-                      <td className="product-itemm">
+                      <td className="product-item">{product.price}</td>
+                      <td className="product-item">{product.quantity}</td>
+                      <td className="product-item">Electric device</td>
+                      <td className="product-item">{product.rating}</td>
+                      <td className="product-item">
                         <button
                           type="button"
                           class="btn btn-primary btn-sm px-3"
