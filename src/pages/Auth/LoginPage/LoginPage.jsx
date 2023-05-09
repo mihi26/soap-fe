@@ -1,15 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import "./LoginPage.scss";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../../store/loading/loadingSlice";
+import { saveUserCredentials } from "../../../store/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/api";
 import * as Yup from "yup";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -24,25 +26,37 @@ export const LoginPage = () => {
         .required("Không được để trống"),
     }),
     onSubmit: async (values) => {
+      dispatch(setLoading(true));
       let payload = {
         username: values.username,
         password: values.password,
       };
       let res = await api("login", payload);
       if (res.success) {
-        navigate("/home");
+        const payload = {
+          accessToken: res.data.data.accessToken,
+          userInfo: res.data.data.user,
+        };
+        dispatch(saveUserCredentials(payload));
       }
+      dispatch(setLoading(false));
     },
   });
 
   const googleLogin = useGoogleLogin({
     flow: "auth-code",
     onSuccess: async (codeResponse) => {
-      const tokens = await api("googleLogin", {
+      const res = await api("googleLogin", {
         code: codeResponse.code,
       });
-      console.log(tokens);
-      //todo: handle this Mihi
+      if (res.success) {
+        const payload = {
+          accessToken: res.data.data.accessToken,
+          userInfo: res.data.data.user,
+        };
+        dispatch(saveUserCredentials(payload));
+      }
+      dispatch(setLoading(false));
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
