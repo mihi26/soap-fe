@@ -10,7 +10,7 @@ const api = (config) => ({
   },
   googleLogin: (payload) => {
     return config("post", "/api/v1/auth/google/login", {
-      code: payload.code
+      code: payload.code,
     });
   },
   signup: (payload) => {
@@ -45,6 +45,25 @@ const api = (config) => ({
   },
   getCategories: () => {
     return config("get", "api/v1/categories", null, requireAccess);
+  },
+  updateCategory: (payload) => {
+    return config(
+      "put",
+      `api/v1/categories/${payload.id}`,
+      {
+        name: payload.name,
+        description: payload.description,
+      },
+      requireAccess
+    );
+  },
+  deleteCategory: (payload) => {
+    return config(
+      "delete",
+      `api/v1/categories/${payload}`,
+      null,
+      requireAccess
+    );
   },
   getUserProfile: () => {
     return config("get", "api/v1/users/me", null, requireAccess);
