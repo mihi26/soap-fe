@@ -22,22 +22,18 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Navigate to="/newfeed" />} />
-      {/* auth routes */}
+      <Route path="home" element={<HomePage />} />
       <Route path="auth-page" element={<AuthPage />}>
         <Route index element={<Navigate to="/auth-page/login" />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
       </Route>
-
       <Route path="user/me" element={<UserPage />} />
-
-      {/* admin routes */}
       <Route path="admin" element={<AdminPage />}>
         <Route index element={<Navigate to="/admin/products" />} />
         <Route path="products" element={<ProductsPage />} />
         <Route path="categories" element={<CategoriesPage />} />
       </Route>
-
       <Route path="home" element={<HomePage />} />
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="landing" element={<LandingPage />} />
