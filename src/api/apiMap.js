@@ -18,16 +18,34 @@ const api = (config) => ({
   getProducts: () => {
     return config("get", "api/v1/products", null, requireAccess);
   },
+  deleteProduct: (payload) => {
+    return config("delete", `api/v1/products/${payload}`, null, requireAccess);
+  },
+  updateProduct: (payload) => {
+    return config(
+      "put",
+      `api/v1/products/${payload.id}`,
+      {
+        name: payload.name,
+        description: payload.description,
+        price: payload.price,
+        quantity: payload.quantity,
+        rating: payload.rating,
+      },
+      requireAccess
+    );
+  },
   getProductDetail: (payload) => {
     return config("get", `api/v1/products/${payload}`, null, requireAccess);
+  },
+  getCategories: () => {
+    return config("get", "api/v1/categories", null, requireAccess);
   },
   getUserProfile: () => {
     return config("get", "api/v1/users/me", null, requireAccess);
   },
   updateUserAvatar: (payload) => {
-    return config("post", "api/v1/users/avatar", {
-      
-    }, requireAccess);
+    return config("post", "api/v1/users/avatar", {}, requireAccess);
   },
 });
 
