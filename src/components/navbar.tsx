@@ -1,9 +1,11 @@
+import logo from "../assets/img/logo.png";
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-sticky py-3 start-0 end-0">
-      <div className="container px-1">
+      <div className="container px-1" style={{maxHeight:"50px"}}>
         <a className="navbar-brand font-weight-bolder ms-lg-0 " href="/home">
-          TikiTaka Ecommerce
+          <img height={50} src={logo} alt="" style={{scale: "1.5"}}/>
         </a>
         <button
           className="navbar-toggler shadow-none ms-2"
@@ -36,6 +38,11 @@ const Navbar = () => {
                 <li>
                   <a className="dropdown-item" href="/auth-page">
                     Login
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/admin">
+                    Admin
                   </a>
                 </li>
                 <li>
