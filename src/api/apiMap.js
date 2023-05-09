@@ -8,6 +8,11 @@ const api = (config) => ({
       password: payload.password,
     });
   },
+  googleLogin: (payload) => {
+    return config("post", "/api/v1/auth/google/login", {
+      code: payload.code
+    });
+  },
   signup: (payload) => {
     return config("post", "api/v1/auth/register", {
       username: payload.username,
@@ -26,7 +31,7 @@ const api = (config) => ({
   },
   updateUserAvatar: (payload) => {
     return config("post", "api/v1/users/avatar", {
-      
+
     }, requireAccess);
   },
 });

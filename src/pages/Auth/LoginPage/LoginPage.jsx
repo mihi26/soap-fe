@@ -1,9 +1,12 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import "./LoginPage.scss";
 import { useFormik } from "formik";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import api from "../../../api/api";
 import * as Yup from "yup";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,19 +16,35 @@ export const LoginPage = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string().min(6, "Ít nhất 6 kí tự").required("Không được để trống"),
-      password: Yup.string().min(6, "Ít nhất 6 kí tự").required("Không được để trống"),
+      username: Yup.string()
+        .min(6, "Ít nhất 6 kí tự")
+        .required("Không được để trống"),
+      password: Yup.string()
+        .min(6, "Ít nhất 6 kí tự")
+        .required("Không được để trống"),
     }),
     onSubmit: async (values) => {
       let payload = {
         username: values.username,
         password: values.password,
-      }
-      let res = await api('login', payload)
+      };
+      let res = await api("login", payload);
       if (res.success) {
-        navigate('/home')
+        navigate("/home");
       }
     },
+  });
+
+  const googleLogin = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (codeResponse) => {
+      const tokens = await api("googleLogin", {
+        code: codeResponse.code,
+      });
+      console.log(tokens);
+      //todo: handle this Mihi
+    },
+    onError: (errorResponse) => console.log(errorResponse),
   });
 
   return (
@@ -42,7 +61,11 @@ export const LoginPage = () => {
             <i className="fab fa-facebook-f"></i>
           </button>
 
-          <button type="button" className="btn btn-link btn-floating mx-1">
+          <button
+            type="button"
+            className="btn btn-link btn-floating mx-1"
+            onClick={() => googleLogin()}
+          >
             <i className="fab fa-google"></i>
           </button>
         </div>
@@ -56,7 +79,11 @@ export const LoginPage = () => {
           <input
             type="text"
             id="username"
-            className={`form-control ${formik.touched.username && formik.errors.username ? 'input-error' : ''}`}
+            className={`form-control ${
+              formik.touched.username && formik.errors.username
+                ? "input-error"
+                : ""
+            }`}
             {...formik.getFieldProps("username")}
           />
           {formik.touched.username && formik.errors.username ? (
@@ -70,7 +97,11 @@ export const LoginPage = () => {
           <input
             type="password"
             id="password"
-            className={`form-control ${formik.touched.password && formik.errors.password ? 'input-error' : ''}`}
+            className={`form-control ${
+              formik.touched.password && formik.errors.password
+                ? "input-error"
+                : ""
+            }`}
             {...formik.getFieldProps("password")}
           />
           {formik.touched.password && formik.errors.password ? (
