@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+import "./AuthPage.scss";
+
 export const AuthPage = () => {
   return (
     <React.Fragment>

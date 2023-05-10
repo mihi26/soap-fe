@@ -40,6 +40,20 @@ const api = (config) => ({
       requireAccess
     );
   },
+  addProduct: (payload) => {
+    return config(
+      "post",
+      `api/v1/products`,
+      {
+        name: payload.name,
+        description: payload.description,
+        price: payload.price,
+        quantity: payload.quantity,
+        rating: payload.rating,
+      },
+      requireAccess
+    );
+  },
   getProductDetail: (payload) => {
     return config("get", `api/v1/products/${payload}`, null, requireAccess);
   },
