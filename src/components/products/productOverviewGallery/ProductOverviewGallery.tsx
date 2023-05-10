@@ -1,6 +1,11 @@
 import ProductRating from "../productRating";
 import ProductImages from "../productImages";
 import { useState } from 'react';
+import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../../store/loading/loadingSlice"
+import { setCartInfo } from "../../../store/cart/cartSlice"
+import api from "../../../api/api"
 import "./productOverviewGallery.scss";
 
 interface Props {
@@ -21,11 +26,34 @@ export default function ProductOverviewGallery({
   description,
 }: Props) {
 
+  const cartId = useSelector(state => state.cart.cartId)
+  const { productId } = useParams()
+  const dispatch = useDispatch()
   const [buyQuantity, setBuyQuantity] = useState(0)
 
   const handleChangeBuyQuantity = e => {
     if (Number(e.target.value) <= quantity) setBuyQuantity(Number(e.target.value))
   }
+
+  const handleAddCart = async () => {
+    dispatch(setLoading(true))
+    let payload = {
+      cartId: cartId,
+      productId: productId,
+      quantity: buyQuantity,
+    }
+    let res = await api("addItemsToCart", payload)
+    if (res.success) {
+      console.log(res.data.data)
+      let payload = {
+        cartId: res.data.data._id,
+        cartItemsLength: res.data.data.quantity,
+      }
+      dispatch(setCartInfo(payload))
+    }
+    dispatch(setLoading(false))
+  }
+
   return (
     <>
       <div className="card card-product card-plain">
@@ -59,6 +87,7 @@ export default function ProductOverviewGallery({
               <button
                 className="btn btn-primary btn-lg mb-0 me-4"
                 disabled={!quantity || !buyQuantity}
+                onClick={handleAddCart}
               >
                 Add to Cart
               </button>

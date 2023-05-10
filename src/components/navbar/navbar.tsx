@@ -1,13 +1,19 @@
-import logo from "../assets/img/logo.png";
-import { useDispatch } from "react-redux";
-import { logOut } from "../store/auth/authSlice";
+import logo from "../../assets/img/logo.png";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { logOut } from "../../store/auth/AuthSlice"
+import "./navbar.scss"
+import { FaShoppingCart } from "react-icons/fa";
+
 
 const Navbar = () => {
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const cartItemsLength = useSelector(state => state.cart.cartItemsLength)
+
   return (
     <nav className="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-sticky py-3 start-0 end-0">
       <div className="container px-1" style={{maxHeight:"50px"}}>
-        <a className="navbar-brand font-weight-bolder ms-lg-0 " href="/home">
+        <a className="navbar-brand font-weight-bolder ms-lg-0 " href="/product">
           <img height={50} src={logo} alt="" style={{scale: "1.5"}}/>
         </a>
         <button
@@ -64,7 +70,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="/checkout/">
+                  <a className="dropdown-item" href="/cart">
                     Shopping Cart
                   </a>
                 </li>
@@ -84,25 +90,11 @@ const Navbar = () => {
                 Documentation
               </a>
             </li>
-            <li className="nav-item">
-              <a
-                className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 "
-                aria-current="page"
-                href="https://github.com/creativetimofficial/astro-ecommerce"
-              >
-                <i className="fab text-lg fa-github"></i>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 "
-                aria-current="page"
-                href="https://discord.com/invite/TGZqBvZB"
-                rel="nofollow"
-                target="_blank"
-              >
-                <i className="fab text-lg fa-discord"></i>
-              </a>
+            <li className="nav-item cart-icon" onClick={() => navigate("/cart")}>
+              <FaShoppingCart color="#1e293b" className="font-weight-bold" size="32px"/>
+              {cartItemsLength ? <div className="cart-items-length">
+                {cartItemsLength}
+              </div> : null}
             </li>
           </ul>
         </div>
