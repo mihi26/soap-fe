@@ -3,6 +3,14 @@
   position: relative;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.navbar-z {
+  z-index: 99;
+}
+
 .cart-items-length {
   color: #fff;
   border-radius: 24px;

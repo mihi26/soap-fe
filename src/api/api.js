@@ -1,7 +1,7 @@
 import axios from "axios";
 import apiMapEndpoint from "./apiMap";
 
-const BASE_URL = "http://52.221.181.217:8080" || "";
+const BASE_URL = "http://54.151.146.16:8080" || "";
 
 const request = axios.create({
   baseURL: BASE_URL,

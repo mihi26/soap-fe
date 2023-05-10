@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../store/loading/loadingSlice";
 import { saveUserCredentials } from "../../../store/auth/authSlice";
+import { toast } from "react-toastify";
 import api from "../../../api/api";
 import * as Yup from "yup";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -36,7 +37,8 @@ export const LoginPage = () => {
           userInfo: res.data.data.user,
         };
         dispatch(saveUserCredentials(payload));
-      }
+        toast.success("Login successful");
+      } else toast.error("Login failed");
       dispatch(setLoading(false));
     },
   });
@@ -53,7 +55,8 @@ export const LoginPage = () => {
           userInfo: res.data.data.user,
         };
         dispatch(saveUserCredentials(payload));
-      }
+        toast.success("Login successful");
+      } else toast.error("Login failed");
       dispatch(setLoading(false));
     },
     onError: (errorResponse) => console.log(errorResponse),
@@ -70,7 +73,7 @@ export const LoginPage = () => {
         <div className="text-center">
           <p>Sign in with:</p>
           <button
-            style={{scale: "2"}}
+            style={{ scale: "2" }}
             type="button"
             className="btn btn-link btn-floating mx-1"
             onClick={() => googleLogin()}

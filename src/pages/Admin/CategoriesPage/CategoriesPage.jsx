@@ -70,7 +70,7 @@ export const CategoriesPage = () => {
       const res = api("updateCategory", result.value);
       getCategoriesFromAPI();
     });
-  }
+  };
 
   useEffect(() => {
     getCategoriesFromAPI();
@@ -84,8 +84,11 @@ export const CategoriesPage = () => {
       >
         Add category
       </button>
-      <div class="col-6">
-        <div class="card shadow-2-strong" style={{ backgroundColor: "#f5f7fa" }}>
+      <div class="col-12">
+        <div
+          class="card shadow-2-strong"
+          style={{ backgroundColor: "#f5f7fa" }}
+        >
           <div class="card-body">
             <div class="table-responsive">
               <table class="table-borderless mb-0">
