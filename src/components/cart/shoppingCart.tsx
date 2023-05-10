@@ -1,9 +1,25 @@
 import ProductCartItem from "./productCartItem/productCartItem";
 import OrderSummary from "./orderSummary";
 import * as React from "react";
+import api from "../../api/api";
 
 export default function ShoppingCart({ products }) {
-  let subtotal = 0;
+  
+  const handleCreateOrder = async () => {
+    let itemArray = []
+    products.forEach(product => {
+      let itemPayload = {
+        product: product.product._id,
+        quantity: product.quantity
+      }
+      itemArray.push(itemPayload)
+    })
+    let payload = {
+      items: itemArray
+    }
+    let res = await api("createOrder", payload)
+    if (res.success) console.log(res.data.data)
+  } 
   return (
     <>
       <div className="container my-5">
@@ -28,9 +44,9 @@ export default function ShoppingCart({ products }) {
               <div className="card-body p-lg-5">
                 <h5 className="mb-4">Order Summary</h5>
                 <OrderSummary />
-                <button className="btn btn-primary btn-lg w-100 mb-0">
-                  Checkout
-                </button>
+                  <button className="btn btn-primary btn-lg w-100 mb-0" onClick={handleCreateOrder}>
+                    Checkout
+                  </button>
               </div>
             </div>
           </div>

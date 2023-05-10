@@ -7,18 +7,32 @@ import CardProduct from "../components/products/cardProduct/cardProduct";
 
 export function ProductPage() {
   const [productList, setProductList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const dispatch = useDispatch();
+
   const getProductsFromApi = async () => {
-    dispatch(setLoading(true));
     let res = await api("getProducts");
     if (res.success) {
       setProductList(res.data.data);
     }
+  };
+
+  const getCategoriesFromApi = async () => {
+    let res = await api("getCategories");
+    if (res.success) {
+      setCategoryList(res.data.data);
+    }
+  };
+
+  const getDataFromApi = async () => {
+    dispatch(setLoading(true));
+    await getProductsFromApi();
+    await getCategoriesFromApi();
     dispatch(setLoading(false));
   };
 
   useEffect(() => {
-    getProductsFromApi();
+    getDataFromApi();
   }, []);
 
   return (

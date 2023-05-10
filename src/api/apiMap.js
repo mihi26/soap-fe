@@ -117,6 +117,16 @@ const api = (config) => ({
       requireAccess
     );
   },
+  createOrder: (payload) => {
+    return config(
+      "post",
+      "api/v1/order",
+      {
+        items: payload.items,
+      },
+      requireAccess
+    );
+  },
 });
 
 export default api;

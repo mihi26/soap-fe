@@ -1,15 +1,17 @@
 import logo from "../../assets/img/logo.png";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { logOut } from "../../store/auth/AuthSlice";
 import "./navbar.scss";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const location = useLocation()
   const cartItemsLength = useSelector((state) => state.cart.cartInfo.quantity);
 
   return (
-    <nav className="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-sticky py-3 start-0 end-0">
+    <nav className="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-sticky py-3 start-0 end-0 navbar-z">
       <div className="container px-1" style={{ maxHeight: "50px" }}>
         <a className="navbar-brand font-weight-bolder ms-lg-0 " href="/product">
           <img height={50} src={logo} alt="" style={{ scale: "1.5" }} />
@@ -31,15 +33,24 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navigation">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item dropdown">
+            <li className="nav-item">
+              <a
+                className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 "
+                aria-current="admin"
+                href="/admin"
+              >
+                Admin
+              </a>
+            </li>
+            {location.pathname == '/product' ? (<li className="nav-item dropdown">
               <a
                 className="nav-link text-dark dropdown-toggle font-weight-bold d-flex align-items-center me-2 "
-                aria-current="page"
+                aria-current="categories"
                 id="pagesExample"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Pages
+                Categories
               </a>
               <ul className="dropdown-menu" aria-labelledby="pagesExample">
                 <li>
@@ -81,20 +92,28 @@ const Navbar = () => {
                   </div>
                 </li>
               </ul>
-            </li>
+            </li>) : null}
             <li className="nav-item">
               <a
                 className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 "
-                aria-current="page"
-                href="https://www.creative-tim.com/learning-lab/astro/overview/astro-ecommerce"
+                aria-current="profile"
+                href="/user/me"
               >
-                Documentation
+                My Profile
               </a>
+            </li>
+            <li className="nav-item">
+              <div
+                className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 cursor-pointer "
+                onClick={() => dispatch(logOut())}
+              >
+                Log out
+              </div>
             </li>
             <li
               className="nav-item cart-icon"
             >
-              <a className="dropdown-item" href="/cart">
+              <a className="dropdown-item"  href="/cart">
                 <FaShoppingCart
                   color="#1e293b"
                   className="font-weight-bold"

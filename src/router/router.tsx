@@ -17,6 +17,7 @@ import { UserPage } from "../pages/User/UserPage.jsx";
 import { AdminPage } from "../pages/Admin/AdminPage.jsx";
 import { ProductsPage } from "../pages/Admin/ProductsPage/ProductsPage.jsx";
 import { CategoriesPage } from "../pages/Admin/CategoriesPage/CategoriesPage.jsx";
+import { CheckoutPage } from "../pages/CheckoutPage.jsx";
 import AuthGuard from "../components/guards/AuthGuard";
 import GuessGuard from "../components/guards/GuessGuard";
 
@@ -51,6 +52,7 @@ export const router = createBrowserRouter(
           <Route path="categories" element={<CategoriesPage />} />
         </Route>
         <Route path="cart" element={<CartPage />} />
+        <Route path="checkout" element={<CheckoutPage />} />
         <Route path="landing" element={<LandingPage />} />
         <Route path="product" element={<ProductPage />} />
         <Route path="product/:productId" element={<ProductDetailPage />} />

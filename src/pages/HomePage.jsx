@@ -34,9 +34,7 @@ export function HomePage() {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="container">
-        <Outlet />
-      </div>
+      <Outlet />
       <Footer />
     </React.Fragment>
   );
