@@ -1,7 +1,5 @@
 import React from "react";
-
 import SideBar from "../../components/Sidebar/index";
-import Navbar from "../../components/navbar";
 import { Outlet } from "react-router-dom";
 import "./AdminPage.scss";
 // import Orders from './pages/Orders';

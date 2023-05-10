@@ -1,0 +1,22 @@
+.cart-icon {
+  cursor: pointer;
+  position: relative;
+}
+
+.cart-items-length {
+  color: #fff;
+  border-radius: 24px;
+  background-color: red;
+  position: absolute;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  font-weight: 700;
+}
