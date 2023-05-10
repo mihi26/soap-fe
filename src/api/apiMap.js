@@ -109,6 +109,14 @@ const api = (config) => ({
       requireAccess
     );
   },
+  deleteItemFromCart: (payload) => {
+    return config(
+      "delete",
+      `api/v1/cart/${payload.cartId}/items/${payload.productId}`,
+      {},
+      requireAccess
+    );
+  },
 });
 
 export default api;

@@ -6,31 +6,25 @@ import Footer from "../components/footer";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../api/api";
 import { setCartInfo } from "../store/cart/cartSlice";
+import { setLoading } from "../store/loading/loadingSlice";
 import { Outlet } from "react-router";
 
 export function HomePage() {
   const dispatch = useDispatch();
-
   const handleUserCart = async () => {
+    dispatch(setLoading(true));
     let cartRes = await api("getUserCart");
     if (cartRes.success) {
       if (!cartRes.data.data.length) {
         let createCartRes = await api("createUserCart");
         if (createCartRes.success) {
-          const createCartPayload = {
-            cartId: createCartRes.data.data._id,
-            cartItemsLength: createCartRes.data.data.quantity,
-          };
-          dispatch(setCartInfo(createCartPayload));
+          dispatch(setCartInfo(createCartRes.data.data));
         }
       } else {
-        const cartPayload = {
-          cartId: cartRes.data.data[0]._id,
-          cartItemsLength: cartRes.data.data[0].quantity,
-        };
-        dispatch(setCartInfo(cartPayload));
+        dispatch(setCartInfo(cartRes.data.data[0]));
       }
     }
+    dispatch(setLoading(false));
   };
 
   useEffect(() => {

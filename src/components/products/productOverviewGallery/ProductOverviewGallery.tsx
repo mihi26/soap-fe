@@ -26,7 +26,7 @@ export default function ProductOverviewGallery({
   description,
 }: Props) {
 
-  const cartId = useSelector(state => state.cart.cartId)
+  const cart = useSelector(state => state.cart.cartInfo)
   const { productId } = useParams()
   const dispatch = useDispatch()
   const [buyQuantity, setBuyQuantity] = useState(0)
@@ -38,18 +38,13 @@ export default function ProductOverviewGallery({
   const handleAddCart = async () => {
     dispatch(setLoading(true))
     let payload = {
-      cartId: cartId,
+      cartId: cart._id,
       productId: productId,
       quantity: buyQuantity,
     }
     let res = await api("addItemsToCart", payload)
     if (res.success) {
-      console.log(res.data.data)
-      let payload = {
-        cartId: res.data.data._id,
-        cartItemsLength: res.data.data.quantity,
-      }
-      dispatch(setCartInfo(payload))
+      dispatch(setCartInfo(res.data.data))
     }
     dispatch(setLoading(false))
   }

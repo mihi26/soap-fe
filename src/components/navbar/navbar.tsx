@@ -1,20 +1,18 @@
 import logo from "../../assets/img/logo.png";
-import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { logOut } from "../../store/auth/AuthSlice"
-import "./navbar.scss"
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../../store/auth/AuthSlice";
+import "./navbar.scss";
 import { FaShoppingCart } from "react-icons/fa";
 
-
 const Navbar = () => {
-  const navigate = useNavigate()
-  const cartItemsLength = useSelector(state => state.cart.cartItemsLength)
+  const dispatch = useDispatch();
+  const cartItemsLength = useSelector((state) => state.cart.cartInfo.quantity);
 
   return (
     <nav className="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-sticky py-3 start-0 end-0">
-      <div className="container px-1" style={{maxHeight:"50px"}}>
+      <div className="container px-1" style={{ maxHeight: "50px" }}>
         <a className="navbar-brand font-weight-bolder ms-lg-0 " href="/product">
-          <img height={50} src={logo} alt="" style={{scale: "1.5"}}/>
+          <img height={50} src={logo} alt="" style={{ scale: "1.5" }} />
         </a>
         <button
           className="navbar-toggler shadow-none ms-2"
@@ -75,7 +73,10 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <div className="dropdown-item" onClick={() => dispatch(logOut())}>
+                  <div
+                    className="dropdown-item"
+                    onClick={() => dispatch(logOut())}
+                  >
                     Log out
                   </div>
                 </li>
@@ -90,11 +91,19 @@ const Navbar = () => {
                 Documentation
               </a>
             </li>
-            <li className="nav-item cart-icon" onClick={() => navigate("/cart")}>
-              <FaShoppingCart color="#1e293b" className="font-weight-bold" size="32px"/>
-              {cartItemsLength ? <div className="cart-items-length">
-                {cartItemsLength}
-              </div> : null}
+            <li
+              className="nav-item cart-icon"
+            >
+              <a className="dropdown-item" href="/cart">
+                <FaShoppingCart
+                  color="#1e293b"
+                  className="font-weight-bold"
+                  size="32px"
+                />
+                {cartItemsLength ? (
+                  <div className="cart-items-length">{cartItemsLength}</div>
+                ) : null}
+              </a>
             </li>
           </ul>
         </div>
