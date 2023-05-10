@@ -4,13 +4,11 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../store/loading/loadingSlice";
 import { saveUserCredentials } from "../../../store/auth/authSlice";
-import { useNavigate } from "react-router-dom";
 import api from "../../../api/api";
 import * as Yup from "yup";
 import { useGoogleLogin } from "@react-oauth/google";
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {

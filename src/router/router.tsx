@@ -50,7 +50,7 @@ export const router = createBrowserRouter(
           <Route path="products" element={<ProductsPage />} />
           <Route path="categories" element={<CategoriesPage />} />
         </Route>
-        <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="cart" element={<CheckoutPage />} />
         <Route path="landing" element={<LandingPage />} />
         <Route path="product" element={<ProductPage />} />
         <Route path="product/:productId" element={<ProductDetailPage />} />

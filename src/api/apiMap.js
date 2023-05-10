@@ -1,5 +1,5 @@
 const requireAccess = {
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTg4MTZhMDJlZWU2YmFlZTA4ZGRkZSIsImlhdCI6MTY4MzUzNzM3MCwiZXhwIjoxNjg2MTI5MzcwfQ.0hbUY0kGtpFl6Ko-iVHMHt3WXaucpTpKHsfCueod_I0`,
+  Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
 };
 const api = (config) => ({
   login: (payload) => {
@@ -68,8 +68,32 @@ const api = (config) => ({
   getUserProfile: () => {
     return config("get", "api/v1/users/me", null, requireAccess);
   },
-  updateUserAvatar: (payload) => {
+  updateUserAvatar: () => {
     return config("post", "api/v1/users/avatar", {}, requireAccess);
+  },
+  getUserCart: () => {
+    return config("get", "api/v1/cart", {}, requireAccess);
+  },
+  createUserCart: () => {
+    return config(
+      "post",
+      "api/v1/cart",
+      {
+        status: "ACTIVE",
+      },
+      requireAccess
+    );
+  },
+  addItemsToCart: (payload) => {
+    return config(
+      "post",
+      `api/v1/cart/${payload.cartId}/items`,
+      {
+        productId: payload.productId,
+        quantity: payload.quantity,
+      },
+      requireAccess
+    );
   },
 });
 
