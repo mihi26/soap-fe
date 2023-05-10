@@ -85,6 +85,17 @@ const api = (config) => ({
   updateUserAvatar: () => {
     return config("post", "api/v1/users/avatar", {}, requireAccess);
   },
+  changePassword: (payload) => {
+    return config(
+      "put",
+      `api/v1/users/reset-password`,
+      {
+        oldPassword: payload.oldPassword,
+        newPassword: payload.newPassword,
+      },
+      requireAccess
+    );
+  },
   getUserCart: () => {
     return config("get", "api/v1/cart", {}, requireAccess);
   },

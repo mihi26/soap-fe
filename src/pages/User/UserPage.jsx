@@ -35,6 +35,39 @@ export const UserPage = () => {
       reader.readAsDataURL(file);
     }
   };
+  const handleChangePassword = () => {
+    Swal.fire({
+      title: "Change password",
+      html: `<label for="old">Old password</label>
+      <input type="password" name="old" id="oldPassword" class="swal2-input placeholder="Old password">
+      <label for="new">New password</label>
+      <input type="password" name="new" id="newPassword" class="swal2-input placeholder="New password"">`,
+      confirmButtonText: "Submit",
+      focusConfirm: false,
+      preConfirm: () => {
+        const oldPassword = Swal.getPopup().querySelector("#oldPassword").value;
+        const newPassword = Swal.getPopup().querySelector("#newPassword").value;
+        return { oldPassword, newPassword };
+      },
+    }).then((result) => {
+      console.log(result.value);
+      const res = api("changePassword", result.value);
+      if (res.message === "Mật khẩu cũ không chính xác") {
+        Swal.fire({
+          icon: "error",
+          text: "Your old password is incorrect",
+        });
+      }
+      if (res.message === "Success") {
+        Swal.fire({
+          icon: "Success",
+          title: "Your password has changed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
   return (
     <section class="h-100 gradient-custom-2">
@@ -56,15 +89,26 @@ export const UserPage = () => {
                     class="img-fluid img-thumbnail mt-4 mb-2"
                     style={{ width: "150px", zIndex: "1" }}
                   />
-                  <button
-                    type="button"
-                    class="btn btn-outline-dark"
-                    data-mdb-ripple-color="dark"
-                    style={{ zIndex: "1" }}
-                    onClick={() => handleImageUpload()}
-                  >
-                    Edit avatar
-                  </button>
+                  <div className="d-flex">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      data-mdb-ripple-color="dark"
+                      style={{ zIndex: "1", minWidth: "150px" }}
+                      onClick={() => handleImageUpload()}
+                    >
+                      Edit avatar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      data-mdb-ripple-color="dark"
+                      style={{ zIndex: "1", minWidth: "150px" }}
+                      onClick={() => handleChangePassword()}
+                    >
+                      Change password
+                    </button>
+                  </div>
                 </div>
                 <div class="ms-3" style={{ marginTop: "130px" }}>
                   <h5>{userInfor.username}</h5>
