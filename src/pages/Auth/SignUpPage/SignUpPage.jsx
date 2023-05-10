@@ -47,18 +47,6 @@ export const SignUpPage = () => {
       aria-labelledby="tab-login"
     >
       <form onSubmit={formik.handleSubmit}>
-        <div className="text-center mb-3">
-          <p>Sign up with:</p>
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-facebook-f"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-google"></i>
-          </button>
-        </div>
-
-        <p className="text-center">or:</p>
         <div className="form-outline mb-2">
           <label className="form-label" htmlFor="registerUsername">
             Username

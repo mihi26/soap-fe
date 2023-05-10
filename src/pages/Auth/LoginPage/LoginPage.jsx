@@ -69,13 +69,10 @@ export const LoginPage = () => {
         role="tabpanel"
         aria-labelledby="tab-login"
       >
-        <div className="text-center mb-3">
+        <div className="text-center">
           <p>Sign in with:</p>
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-facebook-f"></i>
-          </button>
-
           <button
+            style={{scale: "2"}}
             type="button"
             className="btn btn-link btn-floating mx-1"
             onClick={() => googleLogin()}

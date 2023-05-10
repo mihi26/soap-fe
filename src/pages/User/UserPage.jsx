@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api/api";
+import Swal from "sweetalert2";
 
 export const UserPage = () => {
   const [userInfor, setUserInfor] = useState({});
@@ -12,6 +13,28 @@ export const UserPage = () => {
   useEffect(() => {
     getUserInforFromAPI();
   }, []);
+  const handleImageUpload = async () => {
+    const { value: file } = await Swal.fire({
+      title: "Select image",
+      input: "file",
+      inputAttributes: {
+        accept: "image/*",
+        "aria-label": "Upload your profile picture",
+      },
+    });
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        Swal.fire({
+          title: "Your uploaded picture",
+          imageUrl: e.target.result,
+          imageAlt: "The uploaded picture",
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <section class="h-100 gradient-custom-2">
@@ -38,6 +61,7 @@ export const UserPage = () => {
                     class="btn btn-outline-dark"
                     data-mdb-ripple-color="dark"
                     style={{ zIndex: "1" }}
+                    onClick={() => handleImageUpload()}
                   >
                     Edit avatar
                   </button>
@@ -53,28 +77,16 @@ export const UserPage = () => {
               >
                 <div class="d-flex justify-content-end text-center py-1">
                   <div>
-                    <p class="mb-1 h5">253</p>
-                    <p class="small text-muted mb-0">Level</p>
+                    <p class="mb-1 h5">10</p>
+                    <p class="small text-muted mb-0">Products</p>
                   </div>
                   <div class="px-3">
-                    <p class="mb-1 h5">1026</p>
-                    <p class="small text-muted mb-0">Followers</p>
-                  </div>
-                  <div>
-                    <p class="mb-1 h5">478</p>
-                    <p class="small text-muted mb-0">Following</p>
+                    <p class="mb-1 h5">10</p>
+                    <p class="small text-muted mb-0">Bought</p>
                   </div>
                 </div>
               </div>
               <div class="card-body p-4 text-black">
-                <div class="mb-5">
-                  <p class="lead fw-normal mb-1">About</p>
-                  <div class="p-4" style={{ backgroundColor: "#f8f9fa" }}>
-                    <p class="font-italic mb-1">Web Developer</p>
-                    <p class="font-italic mb-1">Lives in Ha Noi</p>
-                    <p class="font-italic mb-0">Gamer</p>
-                  </div>
-                </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <p class="lead fw-normal mb-0">Recently viewed products</p>
                 </div>
