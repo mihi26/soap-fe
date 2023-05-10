@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import App from "../App";
 import { HomePage } from "../pages/HomePage.jsx";
-import { CheckoutPage } from "../pages/CheckoutPage.jsx";
+import { CartPage } from "../pages/CartPage.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
 import { ProductPage } from "../pages/ProductPage.jsx";
 import { ProductDetailPage } from "../pages/ProductDetailPage.jsx";
@@ -50,7 +50,7 @@ export const router = createBrowserRouter(
           <Route path="products" element={<ProductsPage />} />
           <Route path="categories" element={<CategoriesPage />} />
         </Route>
-        <Route path="cart" element={<CheckoutPage />} />
+        <Route path="cart" element={<CartPage />} />
         <Route path="landing" element={<LandingPage />} />
         <Route path="product" element={<ProductPage />} />
         <Route path="product/:productId" element={<ProductDetailPage />} />

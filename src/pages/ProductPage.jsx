@@ -1,15 +1,20 @@
 import { React, useEffect, useState } from "react";
+import { setLoading } from "../store/loading/loadingSlice";
+import { useDispatch } from "react-redux";
 import api from "../api/api";
 import "../assets/scss/soap-ecommerce.scss";
 import CardProduct from "../components/products/cardProduct/cardProduct";
 
 export function ProductPage() {
   const [productList, setProductList] = useState([]);
+  const dispatch = useDispatch();
   const getProductsFromApi = async () => {
+    dispatch(setLoading(true));
     let res = await api("getProducts");
     if (res.success) {
       setProductList(res.data.data);
     }
+    dispatch(setLoading(false));
   };
 
   useEffect(() => {
