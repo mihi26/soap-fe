@@ -1,20 +1,31 @@
 import React from "react";
-import { useEffect } from "react";
-import data from "../mock/data.json";
 import CheckoutOrderSummary from "../components/checkout/checkoutOrderSummary";
-import { setLoading } from "../store/loading/loadingSlice";
 import api from "../api/api";
+import { setLoading } from "../store/loading/loadingSlice";
+import { useParams, useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { replace } from "formik";
 
 export function CheckoutPage() {
-  let testItems = [];
-  data.shoppingCart.map((id) =>
-    data.products.filter((x) => x.id == id).map((x) => testItems.push(x))
-  );
-
+  const cartItems = useSelector((state) => state.cart.cartInfo.items);
+  const navigate = useNavigate();
+  const { orderId } = useParams();
+  const dispatch = useDispatch();
+  const sendPaymentRequest = async () => {
+    dispatch(setLoading(true));
+    let res = await api("orderPayment", orderId);
+    if (res.success) {
+      window.location.replace(res.data.data.payUrl);
+    }
+    dispatch(setLoading(false));
+  };
   return (
     <React.Fragment>
       <div className="container my-5">
-        <CheckoutOrderSummary products={testItems} />
+        <CheckoutOrderSummary
+          products={cartItems}
+          handlePayment={sendPaymentRequest}
+        />
       </div>
     </React.Fragment>
   );

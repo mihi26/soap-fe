@@ -2,25 +2,11 @@ import BillingInfo from "./billingInfo";
 import OrderSummary from "../cart/orderSummary";
 import CheckoutSingleItem from "../checkout/checkoutSingleItem";
 
-interface Props {
-  products: {
-    thumb_src: string;
-    thumb_alt: string;
-    color: string;
-    title: string;
-    price: number;
-    size: string;
-    stock: string;
-    subtotal: number;
-    shipping: number;
-    tax: number;
-  }[];
-  textColor: string;
-}
+export default function CheckoutSummary({ products, handlePayment }) {
 
-export default function CheckoutSummary({ products, textColor }: Props) {
-  let subtotalCheckout = 0;
-  products.map((product) => (subtotalCheckout += product.price));
+  const onHandlePayment = () => {
+    handlePayment()
+  }
   return (
     <>
       <section>
@@ -29,23 +15,21 @@ export default function CheckoutSummary({ products, textColor }: Props) {
             <h5 className="mb-4">Choose payment method</h5>
             <BillingInfo />
             <hr className="dark horizontal" />
-            <button className="btn btn-primary float-end mt-2 mb-0">
+            <button className="btn btn-primary float-end mt-2 mb-0" onClick={onHandlePayment}>
               Pay now
             </button>
           </div>
           <div className="col-12 col-lg-6 p-3 p-md-5 bg-dark bg-gradient rounded-end">
             <h3 className="text-white mb-4">Your order</h3>
-            {products.map((product, i) => (
+            {products.map((product) => (
               <CheckoutSingleItem
-                thumb_src={product.thumb_src}
-                thumb_alt={product.thumb_alt}
-                title={product.title}
-                color={product.color}
-                size={product.size}
-                price={product.price}
+                thumb_src={product.product.imageUrls[0]}
+                title={product.product.name}
+                price={product.product.price * product.quantity}
+                key={product.product._id}
               />
             ))}
-            <OrderSummary subtotal={subtotalCheckout} textColor="white" />
+            <OrderSummary />
           </div>
         </div>
       </section>

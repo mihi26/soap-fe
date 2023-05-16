@@ -1,11 +1,16 @@
 import ProductCartItem from "./productCartItem/productCartItem";
 import OrderSummary from "./orderSummary";
+import { useNavigate } from "react-router";
+import { setLoading } from "../../store/loading/loadingSlice";
+import { useDispatch } from "react-redux";
 import * as React from "react";
 import api from "../../api/api";
 
 export default function ShoppingCart({ products }) {
-  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleCreateOrder = async () => {
+    dispatch(setLoading(true))
     let itemArray = []
     products.forEach(product => {
       let itemPayload = {
@@ -18,7 +23,10 @@ export default function ShoppingCart({ products }) {
       items: itemArray
     }
     let res = await api("createOrder", payload)
-    if (res.success) console.log(res.data.data)
+    if (res.success) {
+      navigate(`/checkout/${res.data.data._id}`)
+    }
+    dispatch(setLoading(false))
   } 
   return (
     <>
