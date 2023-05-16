@@ -88,7 +88,7 @@ const api = (config) => ({
   changePassword: (payload) => {
     return config(
       "put",
-      `api/v1/users/reset-password`,
+      "api/v1/users/reset-password",
       {
         oldPassword: payload.oldPassword,
         newPassword: payload.newPassword,

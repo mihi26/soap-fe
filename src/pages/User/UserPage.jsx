@@ -47,20 +47,23 @@ export const UserPage = () => {
       preConfirm: () => {
         const oldPassword = Swal.getPopup().querySelector("#oldPassword").value;
         const newPassword = Swal.getPopup().querySelector("#newPassword").value;
+        if (newPassword.length < 6) {
+          Swal.showValidationMessage(`
+          Please enter a string greater than or equal to 6`);
+        }
         return { oldPassword, newPassword };
       },
-    }).then((result) => {
-      console.log(result.value);
-      const res = api("changePassword", result.value);
-      if (res.message === "Mật khẩu cũ không chính xác") {
+    }).then(async (result) => {
+      const res = await api("changePassword", result.value);
+      if (!res.success) {
         Swal.fire({
           icon: "error",
           text: "Your old password is incorrect",
         });
       }
-      if (res.message === "Success") {
+      if (res.success) {
         Swal.fire({
-          icon: "Success",
+          icon: "success",
           title: "Your password has changed",
           showConfirmButton: false,
           timer: 1500,
@@ -84,7 +87,10 @@ export const UserPage = () => {
                   style={{ width: "150px" }}
                 >
                   <img
-                    src={userInfor.avatar}
+                    src={
+                      userInfor.avatar ||
+                      "https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg"
+                    }
                     alt="Generic placeholder image"
                     class="img-fluid img-thumbnail mt-4 mb-2"
                     style={{ width: "150px", zIndex: "1" }}
@@ -112,7 +118,7 @@ export const UserPage = () => {
                 </div>
                 <div class="ms-3" style={{ marginTop: "130px" }}>
                   <h5>{userInfor.username}</h5>
-                  <p>Hà Đông</p>
+                  <p style={{ color: "black" }}>Hà Đông</p>
                 </div>
               </div>
               <div
