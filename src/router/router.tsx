@@ -8,7 +8,7 @@ import App from "../App";
 import { HomePage } from "../pages/HomePage.jsx";
 import { CartPage } from "../pages/CartPage.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
-import { ProductPage } from "../pages/ProductPage.jsx";
+import { ProductPage } from "../pages/ProductPage/ProductPage.jsx";
 import { ProductDetailPage } from "../pages/ProductDetailPage.jsx";
 import { AuthPage } from "../pages/Auth/AuthPage.jsx";
 import { LoginPage } from "../pages/Auth/LoginPage/LoginPage.jsx";
