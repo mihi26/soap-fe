@@ -84,7 +84,7 @@ export const CategoriesPage = () => {
       >
         Add category
       </button>
-      <div class="col-12">
+      <div class="col-10">
         <div
           class="card shadow-2-strong"
           style={{ backgroundColor: "#f5f7fa" }}
@@ -117,9 +117,7 @@ export const CategoriesPage = () => {
                         </th>
                         <td className="category-itemm">{category.name}</td>
                         <td className="category-itemm">
-                          {category.description.length > 50
-                            ? category.description.slice(0, 130) + "..."
-                            : category.description}
+                          {category.description}
                         </td>
                         <td className="category-itemm">
                           <button

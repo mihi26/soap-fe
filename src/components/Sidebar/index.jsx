@@ -38,10 +38,6 @@ function SideBar () {
                             </div>
                         ))}
                     </div>
-
-                    <div className='sidebar-footer'>
-                        <span className='sidebar-item-label'>Logout</span>
-                    </div>
                 </div>
             </div>
         </nav>
