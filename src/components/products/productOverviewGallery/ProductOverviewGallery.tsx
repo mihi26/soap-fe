@@ -1,11 +1,12 @@
 import ProductRating from "../productRating";
 import ProductImages from "../productImages";
-import { useState } from 'react';
-import { useParams } from "react-router-dom"
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../../store/loading/loadingSlice"
-import { setCartInfo } from "../../../store/cart/cartSlice"
-import api from "../../../api/api"
+import { setLoading } from "../../../store/loading/loadingSlice";
+import { setCartInfo } from "../../../store/cart/cartSlice";
+import { toast } from "react-toastify";
+import api from "../../../api/api";
 import "./productOverviewGallery.scss";
 
 interface Props {
@@ -25,29 +26,30 @@ export default function ProductOverviewGallery({
   rating,
   description,
 }: Props) {
+  const cart = useSelector((state) => state.cart.cartInfo);
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const [buyQuantity, setBuyQuantity] = useState(1);
 
-  const cart = useSelector(state => state.cart.cartInfo)
-  const { productId } = useParams()
-  const dispatch = useDispatch()
-  const [buyQuantity, setBuyQuantity] = useState(0)
-
-  const handleChangeBuyQuantity = e => {
-    if (Number(e.target.value) <= quantity) setBuyQuantity(Number(e.target.value))
-  }
+  const handleChangeBuyQuantity = (e) => {
+    if (Number(e.target.value) <= quantity)
+      setBuyQuantity(Number(e.target.value));
+  };
 
   const handleAddCart = async () => {
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     let payload = {
       cartId: cart._id,
       productId: productId,
       quantity: buyQuantity,
-    }
-    let res = await api("addItemsToCart", payload)
+    };
+    let res = await api("addItemsToCart", payload);
     if (res.success) {
-      dispatch(setCartInfo(res.data.data))
+      dispatch(setCartInfo(res.data.data));
+      toast.success("Added to cart successfully");
     }
-    dispatch(setLoading(false))
-  }
+    dispatch(setLoading(false));
+  };
 
   return (
     <>

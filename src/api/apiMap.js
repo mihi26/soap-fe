@@ -1,6 +1,3 @@
-const requireAccess = {
-  Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
-};
 const api = (config) => ({
   login: (payload) => {
     return config("post", "api/v1/auth/login", {
@@ -21,10 +18,14 @@ const api = (config) => ({
     });
   },
   getProducts: () => {
-    return config("get", "api/v1/products", null, requireAccess);
+    return config("get", "api/v1/products", null, {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+    });
   },
   deleteProduct: (payload) => {
-    return config("delete", `api/v1/products/${payload}`, null, requireAccess);
+    return config("delete", `api/v1/products/${payload}`, null, {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+    });
   },
   updateProduct: (payload) => {
     return config(
@@ -37,7 +38,9 @@ const api = (config) => ({
         quantity: payload.quantity,
         rating: payload.rating,
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   addProduct: (payload) => {
@@ -51,14 +54,20 @@ const api = (config) => ({
         quantity: payload.quantity,
         rating: payload.rating,
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   getProductDetail: (payload) => {
-    return config("get", `api/v1/products/${payload}`, null, requireAccess);
+    return config("get", `api/v1/products/${payload}`, null, {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+    });
   },
   getCategories: () => {
-    return config("get", "api/v1/categories", null, requireAccess);
+    return config("get", "api/v1/categories", null, {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+    });
   },
   updateCategory: (payload) => {
     return config(
@@ -68,22 +77,30 @@ const api = (config) => ({
         name: payload.name,
         description: payload.description,
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   deleteCategory: (payload) => {
-    return config(
-      "delete",
-      `api/v1/categories/${payload}`,
-      null,
-      requireAccess
-    );
+    return config("delete", `api/v1/categories/${payload}`, null, {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+    });
   },
   getUserProfile: () => {
-    return config("get", "api/v1/users/me", null, requireAccess);
+    return config("get", "api/v1/users/me", null, {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+    });
   },
   updateUserAvatar: () => {
-    return config("post", "api/v1/users/avatar", {}, requireAccess);
+    return config(
+      "post",
+      "api/v1/users/avatar",
+      {},
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
+    );
   },
   changePassword: (payload) => {
     return config(
@@ -93,11 +110,20 @@ const api = (config) => ({
         oldPassword: payload.oldPassword,
         newPassword: payload.newPassword,
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   getUserCart: () => {
-    return config("get", "api/v1/cart", {}, requireAccess);
+    return config(
+      "get",
+      "api/v1/cart",
+      {},
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
+    );
   },
   createUserCart: () => {
     return config(
@@ -106,7 +132,9 @@ const api = (config) => ({
       {
         status: "ACTIVE",
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   addItemsToCart: (payload) => {
@@ -117,7 +145,9 @@ const api = (config) => ({
         productId: payload.productId,
         quantity: payload.quantity,
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   deleteItemFromCart: (payload) => {
@@ -125,7 +155,9 @@ const api = (config) => ({
       "delete",
       `api/v1/cart/${payload.cartId}/items/${payload.productId}`,
       {},
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
   createOrder: (payload) => {
@@ -135,7 +167,9 @@ const api = (config) => ({
       {
         items: payload.items,
       },
-      requireAccess
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
     );
   },
 });
