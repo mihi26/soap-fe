@@ -1,25 +1,33 @@
 import ProductCartItem from "./productCartItem/productCartItem";
 import OrderSummary from "./orderSummary";
+import { useNavigate } from "react-router";
+import { setLoading } from "../../store/loading/loadingSlice";
+import { useDispatch } from "react-redux";
 import * as React from "react";
 import api from "../../api/api";
 
 export default function ShoppingCart({ products }) {
-  console.log(products);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleCreateOrder = async () => {
-    let itemArray = [];
-    products.forEach((product) => {
+    dispatch(setLoading(true))
+    let itemArray = []
+    products.forEach(product => {
       let itemPayload = {
         product: product.product._id,
-        quantity: product.quantity,
-      };
-      itemArray.push(itemPayload);
-    });
+        quantity: product.quantity
+      }
+      itemArray.push(itemPayload)
+    })
     let payload = {
-      items: itemArray,
-    };
-    let res = await api("createOrder", payload);
-    if (res.success) console.log(res.data.data);
-  };
+      items: itemArray
+    }
+    let res = await api("createOrder", payload)
+    if (res.success) {
+      navigate(`/checkout/${res.data.data._id}`)
+    }
+    dispatch(setLoading(false))
+  } 
   return (
     <>
       <div className="container my-5">

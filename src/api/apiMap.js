@@ -172,6 +172,26 @@ const api = (config) => ({
       }
     );
   },
+  getOrderById: (payload) => {
+    return config(
+      "get",
+      `api/v1/order/${payload}`,
+      {},
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
+    );
+  },
+  orderPayment: (payload) => {
+    return config(
+      "post",
+      `api/v1/order/${payload}/payment`,
+      {},
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
+    );
+  },
 });
 
 export default api;
