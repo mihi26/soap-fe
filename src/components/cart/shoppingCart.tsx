@@ -52,9 +52,12 @@ export default function ShoppingCart({ products }) {
               <div className="card-body p-lg-5">
                 <h5 className="mb-4">Order Summary</h5>
                 <OrderSummary />
-                  <button className="btn btn-primary btn-lg w-100 mb-0" onClick={handleCreateOrder}>
-                    Checkout
-                  </button>
+                <button
+                  className="btn btn-primary btn-lg w-100 mb-0"
+                  onClick={handleCreateOrder}
+                >
+                  Checkout
+                </button>
               </div>
             </div>
           </div>
