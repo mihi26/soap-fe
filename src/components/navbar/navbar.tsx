@@ -1,13 +1,13 @@
 import logo from "../../assets/img/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { logOut } from "../../store/auth/AuthSlice";
+import { logOut } from "../../store/auth/authSlice";
 import "./navbar.scss";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const location = useLocation()
+  const location = useLocation();
   const cartItemsLength = useSelector((state) => state.cart.cartInfo.quantity);
 
   return (
@@ -42,57 +42,59 @@ const Navbar = () => {
                 Admin
               </a>
             </li>
-            {location.pathname == '/product' ? (<li className="nav-item dropdown">
-              <a
-                className="nav-link text-dark dropdown-toggle font-weight-bold d-flex align-items-center me-2 "
-                aria-current="categories"
-                id="pagesExample"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Categories
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="pagesExample">
-                <li>
-                  <a className="dropdown-item" href="/auth-page">
-                    Login
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/admin">
-                    Admin
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/user/me">
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/landing">
-                    Landing Page
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/product/">
-                    Product Page
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/cart">
-                    Shopping Cart
-                  </a>
-                </li>
-                <li>
-                  <div
-                    className="dropdown-item"
-                    onClick={() => dispatch(logOut())}
-                  >
-                    Log out
-                  </div>
-                </li>
-              </ul>
-            </li>) : null}
+            {location.pathname == "/product" ? (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link text-dark dropdown-toggle font-weight-bold d-flex align-items-center me-2 "
+                  aria-current="categories"
+                  id="pagesExample"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Categories
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="pagesExample">
+                  <li>
+                    <a className="dropdown-item" href="/auth-page">
+                      Login
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/admin">
+                      Admin
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/user/me">
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/landing">
+                      Landing Page
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/product/">
+                      Product Page
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/cart">
+                      Shopping Cart
+                    </a>
+                  </li>
+                  <li>
+                    <div
+                      className="dropdown-item"
+                      onClick={() => dispatch(logOut())}
+                    >
+                      Log out
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            ) : null}
             <li className="nav-item">
               <a
                 className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 "
@@ -110,10 +112,8 @@ const Navbar = () => {
                 Log out
               </div>
             </li>
-            <li
-              className="nav-item cart-icon"
-            >
-              <a className="dropdown-item"  href="/cart">
+            <li className="nav-item cart-icon">
+              <a className="dropdown-item" href="/cart">
                 <FaShoppingCart
                   color="#1e293b"
                   className="font-weight-bold"
