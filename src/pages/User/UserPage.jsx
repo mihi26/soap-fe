@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api/api";
 import Swal from "sweetalert2";
+import bg from "../../assets/img/bg.jpg";
 
 export const UserPage = () => {
   const [userInfor, setUserInfor] = useState({});
@@ -80,7 +81,12 @@ export const UserPage = () => {
             <div class="card">
               <div
                 class="rounded-top text-white d-flex flex-row"
-                style={{ backgroundColor: "#ccc", height: "200px" }}
+                style={{
+                  backgroundImage: `url(${bg})`,
+                  backgroundSize: "750px 300px",
+                  backgroundPosition: "top",
+                  height: "200px",
+                }}
               >
                 <div
                   class="ms-4 mt-5 d-flex flex-column"
