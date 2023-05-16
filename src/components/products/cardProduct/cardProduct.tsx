@@ -31,14 +31,14 @@ export default function CardProduct({
             />
           </div>
           <div className={classList}>
-            {title && <h5 className="font-weight-bold product-title">{title}</h5>}
+            {title && <h5 className="font-weight-bold product-title">{title.length > 30 ? title.slice(0, 30)+"..." : title}</h5>}
 
-            {description && <p className="text-body text-sm">{description}</p>}
+            {description && <p className="text-body text-sm">{description.length > 100 ? description.slice(0, 100)+"..." : description}</p>}
 
             {price && (
-              <p className="mb-0 text-sm text-body mt-1 mb-3">
+              <h3 className="mb-0 text-xl text-body mt-1 mb-3">
                 {price} VND
-              </p>
+              </h3>
             )}
           </div>
         </a>
