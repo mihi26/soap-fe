@@ -12,11 +12,12 @@ function CategorySidebar({
 
   return (
     <div className="sidebar-wrapper">
+      <h5 className="text-white px-3 pt-3">Categories</h5>
       <div className="sidebar-list">
         {categories.map((category) => (
           <div
-            className={`category-item ${
-              currentCategoryId == category._id ? "category-item-active" : ""
+            className={`sidebar-item ${
+              currentCategoryId == category._id ? "sidebar-item-active" : ""
             }`}
             key={category._id}
             onClick={() => handleClickCategory(category._id)}

@@ -4,11 +4,9 @@ import api from "../api/api";
 import { setLoading } from "../store/loading/loadingSlice";
 import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { replace } from "formik";
 
 export function CheckoutPage() {
   const cartItems = useSelector((state) => state.cart.cartInfo.items);
-  const navigate = useNavigate();
   const { orderId } = useParams();
   const dispatch = useDispatch();
   const sendPaymentRequest = async () => {

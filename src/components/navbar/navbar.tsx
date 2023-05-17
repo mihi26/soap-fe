@@ -55,11 +55,6 @@ const Navbar = () => {
               </a>
               <ul className="dropdown-menu" aria-labelledby="profileItem">
                 <li>
-                  <a className="dropdown-item" href="/auth-page">
-                    Login
-                  </a>
-                </li>
-                <li>
                   <a className="dropdown-item" href="/admin">
                     Admin
                   </a>

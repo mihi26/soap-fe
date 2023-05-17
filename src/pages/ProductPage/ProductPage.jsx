@@ -1,6 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { setLoading } from "../../store/loading/loadingSlice";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../../api/api";
 import CardProduct from "../../components/products/cardProduct/cardProduct";
 import CategorySidebar from "../../components/CategorySidebar/CategorySidebar";
@@ -9,6 +11,7 @@ export function ProductPage() {
   const [productList, setProductList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [currentCategoryId, setCurrentCategoryId] = useState("");
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const getProductsFromApi = async () => {
@@ -31,6 +34,9 @@ export function ProductPage() {
     await getProductsFromApi();
     await getCategoriesFromApi();
     dispatch(setLoading(false));
+    if (location.search.includes("partnerCode=MOMOTTNO")) {
+      toast.success("Order completed");
+    }
   };
 
   const handleCurrentCategory = (value) => {
