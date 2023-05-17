@@ -53,6 +53,7 @@ const api = (config) => ({
         price: payload.price,
         quantity: payload.quantity,
         rating: payload.rating,
+        categories: payload.categories
       },
       {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
@@ -68,6 +69,19 @@ const api = (config) => ({
     return config("get", "api/v1/categories", null, {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
     });
+  },
+  addCategory: (payload) => {
+    return config(
+      "post",
+      `api/v1/categories`,
+      {
+        name: payload.name,
+        description: payload.description
+      },
+      {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("@token"))}`,
+      }
+    );
   },
   updateCategory: (payload) => {
     return config(
