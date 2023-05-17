@@ -21,9 +21,8 @@ export const CategoriesPage = () => {
         const id = Swal.getPopup().querySelector("#categoryId").value;
         return { id: id };
       },
-    }).then((result) => {
-      console.log(result.value.id);
-      api("deleteCategory", result.value.id);
+    }).then(async (result) => {
+      await api("deleteCategory", result.value.id);
       getCategoriesFromAPI();
     });
   };
@@ -31,9 +30,9 @@ export const CategoriesPage = () => {
     Swal.fire({
       title: "Edit category information",
       html: `
-      <input type="text" hidden id="categoryId" value=${id} class="swal2-input">
-      <input type="text" id="categoryName" value=${name} class="swal2-input">
-      <input type="text" id="categoryDes" value=${description} class="swal2-input">`,
+      <input type="text" hidden id="categoryId" value="${id}" class="swal2-input">
+      <input type="text" id="categoryName" value="${name}" class="swal2-input">
+      <input type="text" id="categoryDes" value="${description}" class="swal2-input">`,
       confirmButtonText: "Submit",
       focusConfirm: false,
       preConfirm: () => {
@@ -44,18 +43,17 @@ export const CategoriesPage = () => {
         }
         return { id, name, description };
       },
-    }).then((result) => {
-      const res = api("updateCategory", result.value);
+    }).then(async (result) => {
+      await api("updateCategory", result.value);
       getCategoriesFromAPI();
     });
   };
   const handleAddCategory = () => {
     Swal.fire({
-      title: "Edit category information",
+      title: "Add category",
       html: `
-      <input type="text" hidden id="categoryId" class="swal2-input">
-      <input type="text" id="categoryName" class="swal2-input">
-      <input type="text" id="categoryDes" class="swal2-input">`,
+      <input type="text" id="categoryName" class="swal2-input" placeholder="Category name">
+      <input type="text" id="categoryDes" class="swal2-input" placeholder="Category description">`,
       confirmButtonText: "Submit",
       focusConfirm: false,
       preConfirm: () => {
@@ -64,10 +62,10 @@ export const CategoriesPage = () => {
         if (!name || !description) {
           Swal.showValidationMessage(`Please filled out all the fields`);
         }
-        return { id, name, description };
+        return { name, description };
       },
-    }).then((result) => {
-      const res = api("updateCategory", result.value);
+    }).then(async (result) => {
+      await api("addCategory", result.value);
       getCategoriesFromAPI();
     });
   };
@@ -76,7 +74,7 @@ export const CategoriesPage = () => {
     getCategoriesFromAPI();
   }, []);
   return (
-    <React.Fragment>
+    <div className="categories-page">
       <button
         type="button"
         class="btn btn-success btn-sm px-3"
@@ -89,21 +87,21 @@ export const CategoriesPage = () => {
           class="card shadow-2-strong"
           style={{ backgroundColor: "#f5f7fa" }}
         >
-          <div class="card-body">
+          <div>
             <div class="table-responsive">
               <table class="table-borderless mb-0">
                 <thead>
                   <tr>
-                    <th className="category-itemm" scope="col">
+                    <th className="category-item" scope="col">
                       #
                     </th>
-                    <th className="category-itemm" scope="col">
+                    <th className="category-item" scope="col">
                       Name
                     </th>
-                    <th className="category-itemm" scope="col">
+                    <th className="category-item" scope="col">
                       Description
                     </th>
-                    <th className="category-itemm" scope="col">
+                    <th className="category-item" scope="col">
                       Action
                     </th>
                   </tr>
@@ -112,14 +110,14 @@ export const CategoriesPage = () => {
                   {categories.map((category, index) => {
                     return (
                       <tr>
-                        <th className="product-itemm" scope="row">
+                        <th className="product-item" scope="row">
                           {index + 1}
                         </th>
-                        <td className="category-itemm">{category.name}</td>
-                        <td className="category-itemm">
+                        <td className="category-item">{category.name}</td>
+                        <td className="category-item">
                           {category.description}
                         </td>
-                        <td className="category-itemm">
+                        <td className="category-item">
                           <button
                             type="button"
                             class="btn btn-primary btn-sm px-3"
@@ -150,6 +148,6 @@ export const CategoriesPage = () => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
