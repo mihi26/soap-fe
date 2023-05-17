@@ -42,7 +42,6 @@ const Navbar = () => {
                 Admin
               </a>
             </li>
-            <li className="nav-item">
             <li className="nav-item dropdown">
               <a
                 className="nav-link text-dark dropdown-toggle font-weight-bold d-flex align-items-center me-2 "
@@ -68,11 +67,6 @@ const Navbar = () => {
                 <li>
                   <a className="dropdown-item" href="/user/me">
                     Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/landing">
-                    Landing Page
                   </a>
                 </li>
                 <li>
