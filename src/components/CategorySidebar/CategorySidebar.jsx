@@ -12,7 +12,6 @@ function CategorySidebar({
 
   return (
     <div className="sidebar-wrapper">
-      
       <div className="sidebar-list">
         {categories.map((category) => (
           <div
